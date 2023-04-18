@@ -1,6 +1,7 @@
 import { Table, Pagination } from "@nextui-org/react";
 import { useState } from "react";
 import useSWR from "swr";
+// import styles from "../../styles/table.module.css";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -20,7 +21,7 @@ const table = () => {
   };
   return (
     <div>
-      <Table
+      {/* <Table
         css={{
           height: "auto",
           minWidth: "100%",
@@ -45,7 +46,32 @@ const table = () => {
             </Table.Row>
           ))}
         </Table.Body>
-      </Table>
+      </Table> */}
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">NAME</th>
+            <th scope="col">GENDER</th>
+            <th scope="col">COMPANY</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">PHONE</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.data &&
+            data.data.map((Detail) => (
+              <tr key={Detail._id}>
+                <td scope="row" data-label="NAME">
+                  {Detail.name}
+                </td>
+                <td data-label="GENDER">{Detail.gender}</td>
+                <td data-label="COMPANY">{Detail.company}</td>
+                <td data-label="EMAIL">{Detail.email}</td>
+                <td data-label="PHONE">{Detail.phone}</td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
       <div className="m-8">
         <Pagination total={20} initialPage={1} onChange={handleChange} />
       </div>
